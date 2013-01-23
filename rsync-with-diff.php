@@ -44,8 +44,11 @@ if (count($list)>0) {
         $ext=substr($file,strrpos($file, '.')+1);
         if (diffable($ext)) {
           $diffsables[]=$file;
-          print " "._color('[diffable]', 'blue');
-        }   
+          print " "._color('[diffable]', 'green');
+        } else {
+          $nondiffables[]=$file;
+          print " "._color('[nondiff]', 'blue');
+        }
       }   
     }   
     print "\n";
@@ -123,6 +126,7 @@ function _color($text, $color='') {
   global $colorize;
 
   $return='';
+  if (!$colorize) return $return;
 
   switch($color) {
     case 'red': $color='1;31'; break;
@@ -132,9 +136,9 @@ function _color($text, $color='') {
     default: $color='';
   }
 
-  if ($colorize&&$color<>'') $return.="\033[0;{$color}m";
+  if ($color<>'') $return.="\033[0;{$color}m";
   $return.=$text;
-  if ($colorize&&$color<>'') $return.="\033[0m";
+  if ($color<>'') $return.="\033[0m";
 
   return $return;
 }

@@ -83,11 +83,9 @@ if (count($list)>0) {
   die('Nothing to do, bye'.PHP_EOL);
 }
 
-# if file_count=0 then there's nothing by directories to rsync, no thanks
-# walks the files and displays diffs for text files
-# user will be prompted with Y/N answer to exclude any file that exists
-#  in sourcedir
-# TODO give choice to not copy source file when it doesn't exist on target
+# if file_count=0 then there's nothing by directories to rsync
+# walks the files and displays option to diff
+# user will be prompted to exclude any files
 if ($file_count>0) {
   print "Found $file_count files, $dir_count directories, $diffables diffables".PHP_EOL;
   foreach($files as $file => $type) {
